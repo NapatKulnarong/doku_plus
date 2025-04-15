@@ -2,7 +2,6 @@ import pygame
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-
 GRAY = (200, 200, 200)
 SMOKE = (104, 109, 118)
 RED = (191, 49, 49)
@@ -17,7 +16,7 @@ CLOUDS = (154, 203, 208)
 OCEAN = (54, 116, 181)
 NIGHT = (39, 84, 138)
 WIZARD = (71, 78, 147)
-WIDTH, HEIGHT = 540, 660  # Increased height to accommodate timer
+WIDTH, HEIGHT = 540, 660
 BOARD_SIZE = 540
 CELL_SIZE = BOARD_SIZE // 9
 TIMER_HEIGHT = HEIGHT - BOARD_SIZE
@@ -32,6 +31,5 @@ AVATARS = {
     "Rabbit": pygame.image.load("assets/avatars/rabbit.png"),
     "Seal": pygame.image.load("assets/avatars/seal.png"),
 }
-
 
 pygame.init()
