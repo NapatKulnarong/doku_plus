@@ -1,4 +1,3 @@
-# SudokuGame.py
 from core.SudokuBoard import *
 from core.Timer import *
 from core.constants import *

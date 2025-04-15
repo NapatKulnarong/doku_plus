@@ -1,5 +1,3 @@
-# main.py
-
 # Import required game components and features
 from core.Menu import *
 from core.SudokuGame import *
@@ -10,6 +8,7 @@ from features.PointTracker import PointTracker
 from core.AuthScreen import AuthScreen
 from core.UserManager import UserManager
 import pygame
+
 
 class GameController:
     def __init__(self):
@@ -53,8 +52,6 @@ class GameController:
 
         # Track and animate "level up" celebration
         self.level_up_message_timer = 0
-
-
 
     def handle_login_success(self, username, avatar):
         # Store the login result
@@ -232,6 +229,7 @@ class GameController:
 
         # Exit pygame when done
         pygame.quit()
+
 
 # Entry point for the game
 if __name__ == "__main__":
