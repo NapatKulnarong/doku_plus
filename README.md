@@ -97,5 +97,4 @@ DOKU+ – V0.5
 
 ## 🙌 Author
 Napat Kulnarong
-Built with ❤️ for COM PRO II Project
 ---
