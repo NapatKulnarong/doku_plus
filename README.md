@@ -6,16 +6,12 @@
 
 ## 📁 Folder Structure
 
+```bash
 doku_plus/
-
 │
-
 ├── assets/
-
-│   ├── avatars/              # User avatar images
-
+│   ├── avatars/
 │   │   ├── beer.png
-
 │   │   ├── black_dog.png
 │   │   ├── chick.png
 │   │   ├── gorilla.png
@@ -23,18 +19,18 @@ doku_plus/
 │   │   ├── penguin.png
 │   │   ├── rabbit.png
 │   │   └── seal.png
-│   ├── fonts/                # Custom fonts
+│   ├── fonts/
 │   │   ├── nunito.ttf
 │   │   ├── nunito_bold.ttf
 │   │   ├── nunito_bold_italic.ttf
 │   │   └── nunito_italic.ttf
-│   └── sounds/               # Game sound effects
+│   └── sounds/
 │       ├── click.mp3
 │       ├── exit.mp3
 │       ├── hint.mp3
 │       └── level_up.mp3
 │
-├── core/                     # Core logic and UI
+├── core/
 │   ├── AuthScreen.py
 │   ├── Menu.py
 │   ├── SudokuBoard.py
@@ -44,22 +40,22 @@ doku_plus/
 │   ├── UserManager.py
 │   └── constants.py
 │
-├── data/                     # Save files and user data
+├── data/
 │   ├── game_stats.csv
 │   └── users.json
 │
-├── features/                 # Additional features
-│   ├── analytics/
+├── features/
 │   ├── Leaderboard.py
 │   ├── PointTracker.py
 │   ├── StatsTracker.py
-│   └── Themes.py
+│   ├── Themes.py
+│   └── analytics/               # (future expansion)
 │
 ├── .gitignore
 ├── README.md
 ├── main.py
 └── requirements.txt
----
+```
 
 ## 🔑 Features Implemented (V0.5)
 
@@ -102,12 +98,14 @@ Install dependencies using pip:
 
 ```bash
 pip install -r requirements.txt}
-
+```
 ---
 
 ## 🚀 How to Run
-python main.py
 
+```bash
+python main.py
+```
 ---
 
 ## 📌 Version
