@@ -1,4 +1,4 @@
-# DOKU+ - V0.5
+# DOKU+ V0.5
 
 **DOKU+** is an interactive, user-personalized Sudoku game built with Python and Pygame. It features a clean UI, account system, sound effects, difficulty levels, and progress tracking with points and levels.
 
