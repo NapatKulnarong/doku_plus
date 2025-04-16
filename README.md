@@ -7,10 +7,15 @@
 ## 📁 Folder Structure
 
 doku_plus/
+
 │
+
 ├── assets/
+
 │   ├── avatars/              # User avatar images
+
 │   │   ├── beer.png
+
 │   │   ├── black_dog.png
 │   │   ├── chick.png
 │   │   ├── gorilla.png
