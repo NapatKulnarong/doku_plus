@@ -95,7 +95,7 @@ python main.py
 DOKU+ – V0.5
 ---
 
-🙌 Author
+## 🙌 Author
 Napat Kulnarong
 Built with ❤️ for COM PRO II Project
-
+---
