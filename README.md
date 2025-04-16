@@ -10,51 +10,34 @@
 doku_plus/
 │
 ├── assets/
-│   ├── avatars/
-│   │   ├── beer.png
-│   │   ├── black_dog.png
-│   │   ├── chick.png
-│   │   ├── gorilla.png
-│   │   ├── meerkat.png
-│   │   ├── penguin.png
-│   │   ├── rabbit.png
-│   │   └── seal.png
-│   ├── fonts/
-│   │   ├── nunito.ttf
-│   │   ├── nunito_bold.ttf
-│   │   ├── nunito_bold_italic.ttf
-│   │   └── nunito_italic.ttf
-│   └── sounds/
-│       ├── click.mp3
-│       ├── exit.mp3
-│       ├── hint.mp3
-│       └── level_up.mp3
+│   ├── avatars/             # Avatar images (e.g. penguin, chick, etc.)
+│   ├── fonts/               # Nunito font files used in game UI
+│   └── sounds/              # Sound effects for UI (click, exit, hint, level-up)
 │
 ├── core/
-│   ├── AuthScreen.py
-│   ├── Menu.py
-│   ├── SudokuBoard.py
-│   ├── SudokuGame.py
-│   ├── SudokuRenderer.py
-│   ├── Timer.py
-│   ├── UserManager.py
-│   └── constants.py
+│   ├── AuthScreen.py        # Handles login and account creation UI
+│   ├── Menu.py              # Main menu and difficulty selection
+│   ├── SudokuBoard.py       # Sudoku puzzle generation, validation, solving
+│   ├── SudokuGame.py        # Manages game logic, state, and hint system
+│   ├── SudokuRenderer.py    # Drawing logic for game screen and overlays
+│   ├── Timer.py             # In-game timer and pause/resume
+│   ├── UserManager.py       # JSON-based user storage, authentication
+│   └── constants.py         # Global colors, fonts, screen settings
 │
 ├── data/
-│   ├── game_stats.csv
-│   └── users.json
+│   ├── game_stats.csv       # Game result logs (CSV)
+│   └── users.json           # Stores user accounts, levels, and points
 │
 ├── features/
-│   ├── Leaderboard.py
-│   ├── PointTracker.py
-│   ├── StatsTracker.py
-│   ├── Themes.py
-│   └── analytics/               # (future expansion)
+│   ├── analytics/
+│   │   └── Leaderboard.py   # (Future) Track and rank top users
+│   ├── PointTracker.py      # Track and manage user score & level
+│   ├── StatsTracker.py      # CSV logging of gameplay stats
+│   └── Themes.py            # (Future) Switch between different UI themes
 │
-├── .gitignore
-├── README.md
-├── main.py
-└── requirements.txt
+├── main.py                 # Main game controller loop
+├── requirements.txt        # Python packages required
+└── README.md               # This file
 ```
 
 ## 🔑 Features Implemented (V0.5)
