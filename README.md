@@ -96,5 +96,5 @@ DOKU+ – V0.5
 ---
 
 ## 🙌 Author
-Napat Kulnarong
+Napat Kulnarong (6710545580)
 ---
