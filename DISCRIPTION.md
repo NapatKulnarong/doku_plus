@@ -1,6 +1,7 @@
 # DOKU+ - Your Personalized and Insightful Sudoku Experience
 
-[![Project Overview](link_to_your_project_screenshot_or_gif_here)](link_to_your_project_demo_video_here)
+<a href="https://youtu.be/HzRbsU9Xhxc?si=NcgyhO5JCUonPOZ9" target="_blank" style="display: inline-block; padding: 8px 16px; background-color: #CB0404; color: white; text-decoration: none; border-radius: 4px; font-weight: bold;">YouTube Presentation Video</a>
+<a href="https://docs.google.com/document/d/1gOBRjxQGGh_SdASDwhxMm2NyHlkS8h0bzzeZd7ptrmY/edit?tab=t.0#heading=h.tegym92zswr2" target="_blank" style="display: inline-block; padding: 8px 16px; background-color: #4285F4; color: white; text-decoration: none; border-radius: 4px; font-weight: bold;">Original Project Proposal Here</a>
 
 **DOKU+** is a sophisticated and feature-rich Sudoku game meticulously developed using Python and the Pygame library. This project aims to elevate the classic Sudoku experience by providing users with personalized accounts, dynamically adaptive difficulty levels, intelligent in-game assistance, comprehensive tracking of their progress, and insightful visualizations of their gameplay statistics.
 
