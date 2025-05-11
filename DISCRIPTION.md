@@ -18,7 +18,9 @@ The core concept behind DOKU+ is to provide not just a Sudoku game, but a person
 
 ## 📜 UML Class Diagram
 
-```html<img src="https://github.com/NapatKulnarong/doku_plus/blob/main/UML_Diagram.png" alt="DOKU+ UML Class Diagram" width="80%">```
+```
+html<img src="https://github.com/NapatKulnarong/doku_plus/blob/main/UML_Diagram.png" alt="DOKU+ UML Class Diagram" width="80%">
+```
 ---
 ## 🔑 Key Features
 - Secure User Accounts: Login and registration with password hashing and avatar selection.
