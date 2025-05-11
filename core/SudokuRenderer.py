@@ -1,6 +1,7 @@
 from core.constants import *
 import pygame
 
+
 class SudokuRenderer:
     def __init__(self, screen):
         self.screen = screen
@@ -11,7 +12,6 @@ class SudokuRenderer:
         self.button_font = pygame.font.Font("assets/fonts/nunito_bold.ttf", 28)
         self.hint_font = pygame.font.Font("assets/fonts/nunito_bold.ttf", 34)
         self.gameover_font = pygame.font.Font("assets/fonts/nunito_bold.ttf", 30)
-
 
         # Layout configuration
         self.top_margin = 50
@@ -84,7 +84,6 @@ class SudokuRenderer:
                 self.grid_origin_y + self.grid_height // 2
             ))
             self.screen.blit(pause_text, pause_rect)
-
 
     def draw_elements(self, time_string, is_paused, hints_used, current_points, show_level_up=False):
         # Top bar (Time and Points)
@@ -159,14 +158,12 @@ class SudokuRenderer:
         ]
 
         for i, line in enumerate(lines):
-            font = self.button_font
             text_surf = self.gameover_font.render(line, True, MUSTARD)
             text_rect = text_surf.get_rect(center=(
                 self.grid_origin_x + self.grid_width // 2,
                 self.grid_origin_y + 145 + i * 50
             ))
             self.screen.blit(text_surf, text_rect)
-
 
         pygame.display.flip()
 

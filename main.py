@@ -1,4 +1,3 @@
-# Import required game components and features
 from core.Menu import *
 from core.SudokuGame import *
 from core.SudokuRenderer import *
@@ -11,7 +10,6 @@ from core.Leaderboard import Leaderboard
 from core.PlayScreen import PlayScreen
 from core.HowToPlay import HowToPlay
 from core.GameStatsScreen import GameStatsScreen
-
 import pygame
 
 
@@ -201,7 +199,7 @@ class GameController:
                             if pause_button.collidepoint(event.pos):
                                 self.click_sound.play()
                                 self.game.toggle_pause()
-                                self.renderer.set_paused(self.game.timer.running == False)
+                                self.renderer.set_paused(self.game.timer.running is False)
                             elif hint_button.collidepoint(event.pos):
                                 hint = self.game.get_hint()
                                 if hint:

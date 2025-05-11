@@ -1,11 +1,10 @@
 import os
 import matplotlib
-matplotlib.use('Agg')  # Set backend to Agg for file saving
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 import numpy as np
-from datetime import datetime
+matplotlib.use('Agg')
 
 # Set up paths
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

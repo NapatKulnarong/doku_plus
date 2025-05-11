@@ -4,9 +4,9 @@ from core.constants import *
 class Menu:
     def __init__(self, screen):
         self.screen = screen
-        self.title_font = pygame.font.Font("assets/fonts/nunito_bold_italic.ttf", int(72 * 1.3))  # 94
-        self.button_font = pygame.font.Font("assets/fonts/nunito_bold.ttf", int(32 * 1.3))  # 47
-        self.status_font = pygame.font.Font("assets/fonts/nunito_bold.ttf", int(28 * 1.3))  # 36
+        self.title_font = pygame.font.Font("assets/fonts/nunito_bold_italic.ttf", int(72 * 1.3))
+        self.button_font = pygame.font.Font("assets/fonts/nunito_bold.ttf", int(32 * 1.3))
+        self.status_font = pygame.font.Font("assets/fonts/nunito_bold.ttf", int(28 * 1.3))
 
         self.buttons = ["Play", "Leaderboard", "How to Play", "Statistics", "Exit Game", "Logout"]
         self.button_rects = []
@@ -39,31 +39,31 @@ class Menu:
             avatar_rect = pygame.Rect(avatar_x, avatar_y, int(40 * 1.3), int(40 * 1.3))  # 52x52
 
             # Draw circular white border behind avatar
-            pygame.draw.circle(self.screen, WHITE, avatar_rect.center, int(22 * 1.3))  # 29
+            pygame.draw.circle(self.screen, WHITE, avatar_rect.center, int(22 * 1.3))
 
             # Draw avatar image (square on top of white circle)
             self.screen.blit(avatar_img, (avatar_x, avatar_y))
 
-            avatar_x = WIDTH // 2 - int(70 * 1.3)  # 91
+            avatar_x = WIDTH // 2 - int(70 * 1.3)
             avatar_y = current_y
-            avatar_rect = pygame.Rect(avatar_x, avatar_y, int(40 * 1.3), int(40 * 1.3))  # 52x52
+            avatar_rect = pygame.Rect(avatar_x, avatar_y, int(40 * 1.3), int(40 * 1.3))
 
             self.screen.blit(avatar_img, (avatar_x, avatar_y))
-            pygame.draw.circle(self.screen, WHITE, avatar_rect.center, int(20 * 1.3), 2)  # 26
+            pygame.draw.circle(self.screen, WHITE, avatar_rect.center, int(20 * 1.3), 2)
 
             name_surface = self.status_font.render(username, True, WHITE)
-            name_rect = name_surface.get_rect(midleft=(avatar_rect.right + int(10 * 1.3), avatar_rect.centery))  # 13
+            name_rect = name_surface.get_rect(midleft=(avatar_rect.right + int(10 * 1.3), avatar_rect.centery))
             self.screen.blit(name_surface, name_rect)
 
-            current_y = avatar_rect.bottom + int(10 * 1.3)  # 13
+            current_y = avatar_rect.bottom + int(10 * 1.3)
 
         if point_tracker:
             level = point_tracker.get_level()
             points = point_tracker.get_points()
             points_surface = self.status_font.render(f"Level {level} ({points}/100)", True, WHITE)
-            points_rect = points_surface.get_rect(center=(WIDTH // 2, current_y + int(20 * 1.3)))  # 26
+            points_rect = points_surface.get_rect(center=(WIDTH // 2, current_y + int(20 * 1.3)))
             self.screen.blit(points_surface, points_rect)
-            current_y = points_rect.bottom + int(20 * 1.3)  # 26
+            current_y = points_rect.bottom + int(20 * 1.3)
 
         button_width = int((WIDTH // 2.5) * 1.3)  # ~280 (instead of 351)
         button_height = int(45 * 1.3)  # ~58 (instead of 72)
@@ -87,8 +87,8 @@ class Menu:
             if rect.collidepoint(mouse_pos):
                 bg_color = tuple(max(0, c - 40) for c in bg_color)
 
-            pygame.draw.rect(self.screen, bg_color, rect, border_radius=int(5 * 1.3))  # 7
-            pygame.draw.rect(self.screen, BLACK, rect, 2, border_radius=int(5 * 1.3))  # 7
+            pygame.draw.rect(self.screen, bg_color, rect, border_radius=int(5 * 1.3))
+            pygame.draw.rect(self.screen, BLACK, rect, 2, border_radius=int(5 * 1.3))
 
             text_surface = self.button_font.render(text, True, text_color)
             text_rect = text_surface.get_rect(center=rect.center)
@@ -107,8 +107,8 @@ class Menu:
                         return "leaderboard"
                     case "How to Play":
                         return "howto"
-                    case "Statistics":  # Add this case
-                        return "stats"  # Change this to match the new state
+                    case "Statistics":
+                        return "stats"
                     case "Exit Game":
                         return "exit"
                     case "Logout":

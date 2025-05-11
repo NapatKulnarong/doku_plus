@@ -1,4 +1,3 @@
-import pygame
 import hashlib
 from core.constants import *
 from core.constants import AVATARS
@@ -54,33 +53,34 @@ class AuthScreen:
 
         # --- Username Label & Box ---
         username_label = self.label_font.render("Username", True, WHITE)
-        self.screen.blit(username_label, (WIDTH // 2 - int(100 * 1.3), current_y))  # -130
+        self.screen.blit(username_label, (WIDTH // 2 - int(100 * 1.3), current_y))
         current_y += int(35 * 1.3)  # 46
 
-        self.username_box = pygame.Rect(WIDTH // 2 - int(100 * 1.3), current_y, int(200 * 1.3), int(40 * 1.3))  # -130, 260, 52
-        pygame.draw.rect(self.screen, WHITE, self.username_box, border_radius=int(5 * 1.3))  # 7
-        pygame.draw.rect(self.screen, BLACK, self.username_box, 2, border_radius=int(5 * 1.3))  # 7
+        self.username_box = pygame.Rect(WIDTH // 2 - int(100 * 1.3), current_y, int(200 * 1.3), int(40 * 1.3))
+        pygame.draw.rect(self.screen, WHITE, self.username_box, border_radius=int(5 * 1.3))
+        pygame.draw.rect(self.screen, BLACK, self.username_box, 2, border_radius=int(5 * 1.3))
         username_text = self.input_font.render(self.username, True, BLACK)
-        self.screen.blit(username_text, (self.username_box.x + int(5 * 1.3), self.username_box.y + int(5 * 1.3)))  # 7, 7
+        self.screen.blit(username_text, (self.username_box.x + int(5 * 1.3), self.username_box.y + int(5 * 1.3)))
         current_y += int(55 * 1.3)  # 72
 
         # --- Password Label & Box ---
         password_label = self.label_font.render("Password", True, WHITE)
-        self.screen.blit(password_label, (WIDTH // 2 - int(100 * 1.3), current_y))  # -130
+        self.screen.blit(password_label, (WIDTH // 2 - int(100 * 1.3), current_y))
         current_y += int(35 * 1.3)  # 46
 
-        self.password_box = pygame.Rect(WIDTH // 2 - int(100 * 1.3), current_y, int(200 * 1.3), int(40 * 1.3))  # -130, 260, 52
+        self.password_box = pygame.Rect(WIDTH // 2 - int(100 * 1.3), current_y, int(200 * 1.3), int(40 * 1.3))
         pygame.draw.rect(self.screen, WHITE, self.password_box, border_radius=int(5 * 1.3))  # 7
-        pygame.draw.rect(self.screen, BLACK, self.password_box, 2, border_radius=int(5 * 1.3))  # 7
+        pygame.draw.rect(self.screen, BLACK, self.password_box, 2, border_radius=int(5 * 1.3))
         password_hidden = '*' * len(self.password)
         password_text = self.input_font.render(password_hidden, True, BLACK)
-        self.screen.blit(password_text, (self.password_box.x + int(5 * 1.3), self.password_box.y + int(5 * 1.3)))  # 7, 7
-        current_y += int(65 * 1.3)  # 85
+        self.screen.blit(password_text, (self.password_box.x + int(5 * 1.3), self.password_box.y + int(5 * 1.3)))
+        current_y += int(65 * 1.3)
 
         # --- Avatar Selection (Create Mode Only) ---
         self.avatar_start_y = current_y
         if self.mode == 'create':
-            self.screen.blit(self.label_font.render("Choose Avatar:", True, WHITE), (WIDTH // 2 - int(100 * 1.3), current_y))  # -130
+            self.screen.blit(self.label_font.render
+                             ("Choose Avatar:", True, WHITE), (WIDTH // 2 - int(100 * 1.3), current_y))
             current_y += int(40 * 1.3)  # 52
 
             avatars_per_row = 4
@@ -108,20 +108,21 @@ class AuthScreen:
         # Display error message above buttons if any
         if self.error_message:
             error_text = self.label_font.render(self.error_message, True, MUSTARD)
-            self.screen.blit(error_text, (WIDTH // 2 - error_text.get_width() // 2, button_y_start - int(50 * 1.3)))  # 65
+            self.screen.blit(error_text, (WIDTH // 2 - error_text.get_width() // 2, button_y_start - int(50 * 1.3)))
 
         # Login or Create Account Button
-        self.login_button = pygame.Rect(WIDTH // 2 - int(100 * 1.3), button_y_start, int(200 * 1.3), int(50 * 1.3))  # -130, 260, 65
-        pygame.draw.rect(self.screen, MUSTARD, self.login_button, border_radius=int(5 * 1.3))  # 7
-        pygame.draw.rect(self.screen, BLACK, self.login_button, 2, border_radius=int(5 * 1.3))  # 7
+        self.login_button = pygame.Rect(WIDTH // 2 - int(100 * 1.3), button_y_start, int(200 * 1.3), int(50 * 1.3))
+        pygame.draw.rect(self.screen, MUSTARD, self.login_button, border_radius=int(5 * 1.3))
+        pygame.draw.rect(self.screen, BLACK, self.login_button, 2, border_radius=int(5 * 1.3))
         btn_text = "Create Account" if self.mode == 'create' else "Login"
         btn_surf = self.button_font.render(btn_text, True, BLACK)
         self.screen.blit(btn_surf, btn_surf.get_rect(center=self.login_button.center))
 
         # Switch Mode Button
-        self.switch_mode_button = pygame.Rect(WIDTH // 2 - int(100 * 1.3), button_y_start + int(60 * 1.3), int(200 * 1.3), int(40 * 1.3))  # -130, 78, 260, 52
-        pygame.draw.rect(self.screen, GRAY, self.switch_mode_button, border_radius=int(5 * 1.3))  # 7
-        pygame.draw.rect(self.screen, BLACK, self.switch_mode_button, 2, border_radius=int(5 * 1.3))  # 7
+        self.switch_mode_button = pygame.Rect(WIDTH // 2 - int(100 * 1.3),
+                                              button_y_start + int(60 * 1.3), int(200 * 1.3), int(40 * 1.3))
+        pygame.draw.rect(self.screen, GRAY, self.switch_mode_button, border_radius=int(5 * 1.3))
+        pygame.draw.rect(self.screen, BLACK, self.switch_mode_button, 2, border_radius=int(5 * 1.3))
         switch_text = "Switch to Login" if self.mode == 'create' else "Switch to Create"
         switch_surf = self.button_font.render(switch_text, True, BLACK)
         self.screen.blit(switch_surf, switch_surf.get_rect(center=self.switch_mode_button.center))
@@ -147,15 +148,15 @@ class AuthScreen:
             # --- Avatar selection (Create mode only) ---
             if self.mode == 'create' and self.avatar_start_y is not None:
                 avatars_per_row = 4
-                avatar_spacing = int(50 * 1.3)  # 65
-                avatar_size = int(40 * 1.3)  # 52
+                avatar_spacing = int(50 * 1.3)
+                avatar_size = int(40 * 1.3)
                 start_x = WIDTH // 2 - (avatars_per_row * avatar_spacing) // 2
 
                 for i, name in enumerate(AVATARS):
                     row = i // avatars_per_row
                     col = i % avatars_per_row
                     x = start_x + col * avatar_spacing
-                    y = self.avatar_start_y + int(40 * 1.3) + row * avatar_spacing  # 52
+                    y = self.avatar_start_y + int(40 * 1.3) + row * avatar_spacing
                     avatar_rect = pygame.Rect(x, y, avatar_size, avatar_size)
                     if avatar_rect.collidepoint(event.pos):
                         self.click_sound.play()

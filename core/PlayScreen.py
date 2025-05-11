@@ -1,5 +1,5 @@
-import pygame
 from core.constants import *
+
 
 class PlayScreen:
     def __init__(self, screen, click_sound):
@@ -7,8 +7,8 @@ class PlayScreen:
         self.click_sound = click_sound
 
         # Scaled fonts (64*1.3=83, 32*1.3=42)
-        self.title_font = pygame.font.Font("assets/fonts/nunito_bold_italic.ttf", int(64 * 1.3))  # 83
-        self.button_font = pygame.font.Font("assets/fonts/nunito_bold.ttf", int(32 * 1.3))  # 42
+        self.title_font = pygame.font.Font("assets/fonts/nunito_bold_italic.ttf", int(64 * 1.3))
+        self.button_font = pygame.font.Font("assets/fonts/nunito_bold.ttf", int(32 * 1.3))
 
         self.buttons = ["Easy", "Medium", "Hard", "Advanced", "Back to Menu"]
         self.button_rects = []
@@ -23,13 +23,10 @@ class PlayScreen:
 
     def draw(self):
         self.screen.fill(NIGHT)
-
-        # Scaled button dimensions (original: 300,55,15 -> scaled: 300*1.3=390, 55*1.3=72, 15*1.3=20)
-        # But we'll make them slightly smaller than full 1.3x scale for better proportions
-        button_width = int(300 * 1.2)  # 360 (instead of 390)
-        button_height = int(50 * 1.3)  # 65 (instead of 72)
-        spacing = int(15 * 1.3)  # 20
-        start_y = int(165 * 1.3)  # 215
+        button_width = int(300 * 1.2)
+        button_height = int(50 * 1.3)
+        spacing = int(15 * 1.3)
+        start_y = int(165 * 1.3)
 
         self.button_rects.clear()
         for i, text in enumerate(self.buttons):
@@ -43,8 +40,8 @@ class PlayScreen:
 
             bg_color = self.button_colors.get(text, LIGHT_BLUE)
 
-            pygame.draw.rect(self.screen, bg_color, rect, border_radius=int(8 * 1.3))  # 10
-            pygame.draw.rect(self.screen, BLACK, rect, 2, border_radius=int(8 * 1.3))  # 10
+            pygame.draw.rect(self.screen, bg_color, rect, border_radius=int(8 * 1.3))
+            pygame.draw.rect(self.screen, BLACK, rect, 2, border_radius=int(8 * 1.3))
 
             text_surf = self.button_font.render(text, True, BLACK)
             text_rect = text_surf.get_rect(center=rect.center)
