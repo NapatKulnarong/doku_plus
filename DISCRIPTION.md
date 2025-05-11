@@ -100,7 +100,9 @@ doku_plus/
 ```
 ---
 ## Developed By
+```
 Napat Kulnarong (6710545580)
+```
 ---
 MIT License
 
