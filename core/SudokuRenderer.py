@@ -7,9 +7,9 @@ class SudokuRenderer:
         self.title_font = pygame.font.Font("assets/fonts/nunito_bold_italic.ttf", 72)
         self.title_font_2 = pygame.font.Font("assets/fonts/nunito_bold.ttf", 60)
         self.board_font = pygame.font.Font("assets/fonts/nunito_bold.ttf", 36)
-        self.timer_font = pygame.font.Font("assets/fonts/nunito_bold.ttf", 28)
-        self.button_font = pygame.font.Font("assets/fonts/nunito_bold.ttf", 21)
-        self.hint_font = pygame.font.Font("assets/fonts/nunito_bold.ttf", 27)
+        self.timer_font = pygame.font.Font("assets/fonts/nunito_bold.ttf", 39)
+        self.button_font = pygame.font.Font("assets/fonts/nunito_bold.ttf", 28)
+        self.hint_font = pygame.font.Font("assets/fonts/nunito_bold.ttf", 34)
         self.gameover_font = pygame.font.Font("assets/fonts/nunito_bold.ttf", 30)
 
 
@@ -26,7 +26,7 @@ class SudokuRenderer:
         self.grid_width = self.cell_size * 9
         self.grid_height = self.cell_size * 9
         self.grid_origin_x = (WIDTH - self.grid_width) // 2
-        self.grid_origin_y = self.top_margin
+        self.grid_origin_y = self.top_margin + 35
 
     def draw_board(self, board, selected_cell, hint_cell=None):
         self.screen.fill(NIGHT)
@@ -92,14 +92,13 @@ class SudokuRenderer:
 
         timer_text = self.timer_font.render(f"Time: {time_string}", True, WHITE)
         points_text = self.timer_font.render(f"Points: {current_points}", True, WHITE)
-
-        self.screen.blit(timer_text, (self.side_margin, 10))
-        points_rect = points_text.get_rect(topright=(WIDTH - self.side_margin, 10))
+        self.screen.blit(timer_text, (self.side_margin, 20))
+        points_rect = points_text.get_rect(topright=(WIDTH - self.side_margin, 20))
         self.screen.blit(points_text, points_rect)
 
         # Level up message
         if show_level_up:
-            level_up_text = self.button_font.render("LEVEL UP! 🎉", True, RED)
+            level_up_text = self.button_font.render("LEVEL UP!", True, RED)
             level_up_rect = level_up_text.get_rect(center=(WIDTH // 2, self.top_margin // 2))
             self.screen.blit(level_up_text, level_up_rect)
 
@@ -107,18 +106,18 @@ class SudokuRenderer:
         pygame.draw.rect(self.screen, NIGHT, (0, HEIGHT - self.bottom_margin, WIDTH, self.bottom_margin))
         bottom_y = HEIGHT - self.bottom_margin + 30
 
-        hints_text = self.hint_font.render(f"Hints Used: {hints_used}", True, WHITE)
-        self.screen.blit(hints_text, (self.side_margin, bottom_y))
+        hints_text = self.timer_font.render(f"Hints Used: {hints_used}", True, WHITE)
+        self.screen.blit(hints_text, (self.side_margin, bottom_y-10))
 
         # Buttons: Hint, Pause, Exit
-        button_width = 90
-        button_height = 40
+        button_width = 117
+        button_height = 52
         gap = 10
 
         # Right-align buttons
-        exit_button = pygame.Rect(WIDTH - self.side_margin - button_width, bottom_y, button_width, button_height)
-        pause_button = pygame.Rect(exit_button.left - gap - button_width, bottom_y, button_width, button_height)
-        hint_button = pygame.Rect(pause_button.left - gap - button_width, bottom_y, button_width, button_height)
+        exit_button = pygame.Rect(WIDTH - self.side_margin - button_width, bottom_y-10, button_width, button_height)
+        pause_button = pygame.Rect(exit_button.left - gap - button_width, bottom_y-10, button_width, button_height)
+        hint_button = pygame.Rect(pause_button.left - gap - button_width, bottom_y-10, button_width, button_height)
 
         # Draw Hint button
         pygame.draw.rect(self.screen, LEAF, hint_button)

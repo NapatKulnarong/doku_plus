@@ -8,6 +8,7 @@ DATA_FILE = os.path.join(BASE_DIR, "data", "game_stats.csv")
 
 
 def load_data(filename):
+    """Load data from CSV file."""
     try:
         with open(filename, mode='r') as file:
             reader = csv.DictReader(file)
@@ -18,6 +19,7 @@ def load_data(filename):
 
 
 def summarize(data):
+    """Summarize data."""
     if not data:
         print("No data to analyze.")
         return
@@ -44,16 +46,18 @@ def summarize(data):
 
 
 def main():
+    """Main function to generate graphs and stats."""
     data = load_data(DATA_FILE)
     summarize(data)
 
-    # Graphs
+    # Generate graphs
     graph_generator.generate_time_played_line_graph(data)
     graph_generator.generate_mistakes_bar_chart(data)
     graph_generator.generate_win_loss_pie_chart(data)
     graph_generator.generate_hints_usage_pie_chart(data)
     graph_generator.generate_time_per_difficulty_boxplot(data)
-    graph_generator.generate_time_vs_mistakes_scatter(data)
+    graph_generator.generate_correlation_matrix(data)
+    graph_generator.generate_time_statistics_table(data)
 
 
 if __name__ == "__main__":

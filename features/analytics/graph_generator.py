@@ -1,91 +1,284 @@
+import os
 import matplotlib
+matplotlib.use('Agg')  # Set backend to Agg for file saving
 import matplotlib.pyplot as plt
-from collections import Counter, defaultdict
-matplotlib.use('TkAgg')
+import pandas as pd
+import seaborn as sns
+import numpy as np
+from datetime import datetime
 
-# Helper to convert time string 'mm:ss' to total seconds
-def time_to_seconds(time_str):
+# Set up paths
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+GRAPHS_DIR = os.path.join(BASE_DIR, "assets", "stats_graphs")
+os.makedirs(GRAPHS_DIR, exist_ok=True)
+
+
+def _save_figure(filename):
+    """Helper function to save figures consistently"""
+    path = os.path.join(GRAPHS_DIR, filename)
+    plt.savefig(path, bbox_inches='tight', dpi=100)
+    plt.close()
+    return path
+
+
+def convert_time_to_seconds(time_str):
+    """Converts time in 'MM:SS' format to total seconds."""
     try:
-        minutes, seconds = map(int, time_str.split(":"))
+        minutes, seconds = map(int, time_str.split(':'))
         return minutes * 60 + seconds
-    except Exception:
+    except:
         return 0
 
-# 1️⃣ Time Played — Line Graph
+
 def generate_time_played_line_graph(data):
-    times = [time_to_seconds(row['Time']) for row in data]
-    plt.figure()
-    plt.plot(range(1, len(times) + 1), times, marker='o')
-    plt.title('Completion Time per Session')
-    plt.xlabel('Session Number')
-    plt.ylabel('Time (seconds)')
-    plt.grid(True)
-    plt.show()
+    """Generates a line graph for average time played per session by difficulty."""
+    df = pd.DataFrame(data)
+    df['Time Played'] = df['Time'].apply(convert_time_to_seconds)
+    df['Date'] = pd.to_datetime(df['Timestamp']).dt.date
 
-# 2️⃣ Mistakes per Difficulty — Bar Chart
+    plt.figure(figsize=(12, 6))
+    sns.lineplot(data=df, x='Date', y='Time Played', hue='Difficulty',
+                 palette='viridis', marker='o')
+    plt.title('Time Played Over Time by Difficulty')
+    plt.xlabel('Date')
+    plt.ylabel('Time Played (seconds)')
+    plt.xticks(rotation=45)
+    plt.grid(True)
+    plt.tight_layout()
+    _save_figure('time_played_line.png')
+
+
 def generate_mistakes_bar_chart(data):
-    difficulty_mistakes = defaultdict(list)
-    for row in data:
-        difficulty_mistakes[row['Difficulty']].append(int(row['Mistakes']))
+    """Generates a bar chart of average mistakes by difficulty."""
+    df = pd.DataFrame(data)
+    df['Mistakes'] = pd.to_numeric(df['Mistakes'])
 
-    difficulties = list(difficulty_mistakes.keys())
-    avg_mistakes = [sum(values) / len(values) for values in difficulty_mistakes.values()]
+    plt.figure(figsize=(10, 6))
+    ax = sns.barplot(data=df, x='Difficulty', y='Mistakes', errorbar=None,
+                     hue='Difficulty', palette=['#4CAF50', '#FFC107', '#FF9800', '#F44336'],
+                     legend=False)
 
-    plt.figure()
-    plt.bar(difficulties, avg_mistakes, color='skyblue')
-    plt.title('Average Mistakes by Difficulty')
-    plt.xlabel('Difficulty Level')
-    plt.ylabel('Average Mistakes')
-    plt.show()
+    # Add value labels
+    for p in ax.patches:
+        ax.annotate(f"{p.get_height():.1f}",
+                    (p.get_x() + p.get_width() / 2., p.get_height()),
+                    ha='center', va='center', xytext=(0, 10),
+                    textcoords='offset points', fontweight='bold')
 
-# 3️⃣ Win/Loss — Pie Chart
+    plt.title('Average Mistakes by Difficulty', fontsize=14, pad=20)
+    plt.xlabel('Difficulty Level', fontweight='bold')
+    plt.ylabel('Average Mistakes', fontweight='bold')
+    plt.grid(axis='y', alpha=0.3)
+    _save_figure('mistakes_bar.png')
+
+
 def generate_win_loss_pie_chart(data):
-    outcomes = Counter(row['Win'] for row in data)
-    labels = outcomes.keys()
-    sizes = outcomes.values()
+    """Generates a pie chart of win/loss distribution."""
+    df = pd.DataFrame(data)
+    win_counts = df['Win'].value_counts()
 
-    plt.figure()
-    plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=140, colors=['lightgreen', 'salmon'])
-    plt.title('Win vs. Loss Distribution')
+    plt.figure(figsize=(8, 8))
+    patches, texts, autotexts = plt.pie(
+        win_counts,
+        labels=['Wins', 'Losses'],
+        colors=['#66BB6A', '#EF5350'],
+        explode=(0.05, 0),
+        autopct='%1.1f%%',
+        startangle=140,
+        shadow=True,
+        textprops={'fontsize': 12, 'fontweight': 'bold'},
+        wedgeprops={'edgecolor': 'black', 'linewidth': 1}
+    )
+
+    for autotext in autotexts:
+        autotext.set_color('white')
+
+    plt.title(f'Win/Loss Distribution\n({win_counts["Win"]} Wins vs {win_counts.get("Loss", 0)} Losses)',
+              fontsize=14, pad=20)
     plt.axis('equal')
-    plt.show()
+    _save_figure('win_loss_pie.png')
 
-# 4️⃣ Hints Used — Pie Chart
+
 def generate_hints_usage_pie_chart(data):
-    hints_used = sum(1 for row in data if int(row['Hints Used']) > 0)
-    no_hints_used = len(data) - hints_used
+    """Generates a pie chart of hint usage."""
+    df = pd.DataFrame(data)
+    df['Hints Used'] = pd.to_numeric(df['Hints Used'])
+    usage = ['Used Hints' if x > 0 else 'No Hints' for x in df['Hints Used']]
+    usage_counts = pd.Series(usage).value_counts()
 
-    plt.figure()
-    plt.pie([hints_used, no_hints_used], labels=['Hints Used', 'No Hints'], autopct='%1.1f%%', startangle=140, colors=['gold', 'lightgrey'])
-    plt.title('Hint Usage Distribution')
+    plt.figure(figsize=(8, 8))
+    patches, texts, autotexts = plt.pie(
+        usage_counts,
+        labels=usage_counts.index,
+        colors=['#FFD700', '#E0E0E0'],
+        explode=(0.05, 0),
+        autopct=lambda p: f'{p:.1f}%\n({int(p / 100 * len(data))})',
+        startangle=140,
+        shadow=True,
+        textprops={'fontsize': 11, 'fontweight': 'bold'},
+        wedgeprops={'edgecolor': 'black', 'linewidth': 1}
+    )
+
+    plt.title(f'Hint Usage Distribution\nTotal Games: {len(data)}', fontsize=14, pad=20)
     plt.axis('equal')
-    plt.show()
+    _save_figure('hints_pie.png')
 
-# 5️⃣ Time Played per Difficulty — Boxplot
+
 def generate_time_per_difficulty_boxplot(data):
-    times_by_difficulty = defaultdict(list)
-    for row in data:
-        times_by_difficulty[row['Difficulty']].append(time_to_seconds(row['Time']))
+    """Generates a boxplot of time played by difficulty."""
+    df = pd.DataFrame(data)
+    df['Time Played'] = df['Time'].apply(convert_time_to_seconds)
 
-    difficulties = list(times_by_difficulty.keys())
-    times = [times_by_difficulty[diff] for diff in difficulties]
+    plt.figure(figsize=(12, 7))
+    ax = sns.boxplot(data=df, x='Difficulty', y='Time Played',
+                     hue='Difficulty', palette=['#2ecc71', '#f39c12', '#e74c3c', '#9b59b6'],
+                     legend=False)
 
-    plt.figure()
-    plt.boxplot(times, labels=difficulties)
-    plt.title('Completion Time by Difficulty')
-    plt.xlabel('Difficulty Level')
-    plt.ylabel('Time (seconds)')
-    plt.show()
+    # Create custom y-axis labels
+    secs = np.linspace(ax.get_ylim()[0], ax.get_ylim()[1], num=5)
+    mins = secs // 60
+    remaining_secs = secs % 60
+    y_labels = [f"{int(m)}:{int(s):02d}" for m, s in zip(mins, remaining_secs)]
+    ax.set_yticks(secs)
+    ax.set_yticklabels(y_labels)
 
-# 6️⃣ Time vs. Mistakes — Scatter Plot
-def generate_time_vs_mistakes_scatter(data):
-    times = [time_to_seconds(row['Time']) for row in data]
-    mistakes = [int(row['Mistakes']) for row in data]
+    plt.title('Completion Time Distribution by Difficulty', fontsize=14, pad=20)
+    plt.xlabel('Difficulty Level', fontweight='bold')
+    plt.ylabel('Completion Time (min:sec)', fontweight='bold')
+    plt.grid(axis='y', alpha=0.3)
+    _save_figure('time_boxplot.png')
 
-    plt.figure()
-    plt.scatter(times, mistakes, color='purple')
-    plt.title('Time vs Mistakes')
-    plt.xlabel('Time (seconds)')
-    plt.ylabel('Mistake Count')
-    plt.grid(True)
-    plt.show()
+
+def generate_correlation_matrix(data):
+    """Generates a correlation matrix heatmap."""
+    df = pd.DataFrame(data)
+
+    # Convert columns to numeric values
+    df['Time'] = df['Time'].apply(convert_time_to_seconds)
+    for col in ['Mistakes', 'Hints Used', 'Filled Cells']:
+        df[col] = pd.to_numeric(df[col])
+
+    # Add win as binary
+    df['Win Binary'] = (df['Win'] == 'Win').astype(int)
+
+    # Calculate correlation
+    corr = df[['Time', 'Mistakes', 'Hints Used', 'Filled Cells', 'Win Binary']].corr()
+
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(corr, annot=True, cmap='coolwarm', center=0, vmin=-1, vmax=1,
+                annot_kws={'fontweight': 'bold'})
+    plt.title('Game Metrics Correlation Matrix', fontsize=14, pad=20)
+    _save_figure('correlation_matrix.png')
+
+
+def generate_time_statistics_table(data):
+    """Generates a properly formatted table of time statistics grouped by difficulty in specific order."""
+    df = pd.DataFrame(data)
+    df['Time Played'] = df['Time'].apply(convert_time_to_seconds)
+
+    # Define the correct difficulty order
+    difficulty_order = ['easy', 'medium', 'hard', 'advanced']
+
+    # Group by difficulty and calculate statistics
+    grouped = df.groupby('Difficulty')['Time Played'].agg([
+        ('n', 'count'),
+        ('min', 'min'),
+        ('max', 'max'),
+        ('range', lambda x: x.max() - x.min()),
+        ('mean', 'mean'),
+        ('median', 'median'),
+        ('stdev', 'std')
+    ]).reset_index()
+
+    # Ensure all difficulty levels are present and ordered correctly
+    for diff in difficulty_order:
+        if diff not in grouped['Difficulty'].values:
+            grouped = grouped.append({
+                'Difficulty': diff,
+                'n': 0,
+                'min': None,
+                'max': None,
+                'range': None,
+                'mean': None,
+                'median': None,
+                'stdev': None
+            }, ignore_index=True)
+
+    # Convert Difficulty to ordered category for sorting
+    grouped['Difficulty'] = pd.Categorical(
+        grouped['Difficulty'],
+        categories=difficulty_order,
+        ordered=True
+    )
+    grouped = grouped.sort_values('Difficulty')
+
+    # Format the statistics
+    formatted_stats = grouped.copy()
+    formatted_stats['n'] = formatted_stats['n'].astype(int).astype(str)
+    for col in ['min', 'max', 'range', 'mean', 'median', 'stdev']:
+        formatted_stats[col] = formatted_stats[col].apply(
+            lambda x: f"{x:.1f}" if pd.notna(x) and x != 0 else "-"
+        )
+
+    # Capitalize difficulty names for display
+    formatted_stats['Difficulty'] = formatted_stats['Difficulty'].str.capitalize()
+
+    # Create the figure
+    plt.figure(figsize=(10, 4))  # Wider figure to accommodate more columns
+    ax = plt.gca()
+    ax.axis('off')
+
+    # Define colors
+    header_color = '#3498db'
+    row_colors = ['#f8f8f8', '#f0f0f0']  # Alternating row colors
+    difficulty_color = '#2c3e50'
+
+    # Create table with proper formatting
+    table = ax.table(
+        cellText=formatted_stats.iloc[:, 1:].values,  # Skip Difficulty column for cell text
+        rowLabels=formatted_stats['Difficulty'],
+        colLabels=['n', 'min', 'max', 'range', 'mean', 'median', 'stdev'],
+        loc='center',
+        cellLoc='center',
+        colColours=[header_color] * 7,
+        cellColours=[[row_colors[i % 2]] * 7 for i in range(len(formatted_stats))]
+    )
+
+    # Style the table
+    table.auto_set_font_size(False)
+    table.set_fontsize(11)
+    table.scale(1.2, 2)  # Adjusted scale for better fit
+
+    # Customize cell appearance
+    for (i, j), cell in table.get_celld().items():
+        cell.set_edgecolor('#dddddd')
+        cell.set_linewidth(0.5)
+        if i == 0:  # Header row
+            cell.set_text_props(color='white', fontweight='bold')
+            cell.set_facecolor(header_color)
+        else:  # Data cells
+            cell.set_text_props(color='#333333')
+            # Highlight difficulty column
+            if j == -1:  # First column (row labels)
+                cell.set_text_props(color='white', fontweight='bold')
+                cell.set_facecolor(difficulty_color)
+
+    plt.title('Time Played Statistics by Difficulty (seconds)', fontsize=12, pad=20)
+    plt.tight_layout()
+    _save_figure('time_stats_table.png')
+
+
+def generate_all_graphs(data):
+    """Generate and save all graphs"""
+    try:
+        generate_time_played_line_graph(data)
+        generate_mistakes_bar_chart(data)
+        generate_win_loss_pie_chart(data)
+        generate_hints_usage_pie_chart(data)
+        generate_time_per_difficulty_boxplot(data)
+        generate_correlation_matrix(data)
+        generate_time_statistics_table(data)
+        return True
+    except Exception as e:
+        print(f"Error generating graphs: {e}")
+        return False

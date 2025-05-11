@@ -34,5 +34,29 @@
         "avatar": "Black Dog",
         "points": 74,
         "level": 7
+    },
+    "Mark": {
+        "password_hash": "bcb15f821479b4d5772bd0ca866c00ad5f926e3580720659cc80d39c9d09802a",
+        "avatar": "Gorilla"
+    },
+    "aaaaa": {
+        "password_hash": "ed968e840d10d2d313a870bc131a4e2c311d7ad09bdf32b3418147221f51a6e2",
+        "avatar": "Bear"
+    },
+    "AAAAAA": {
+        "password_hash": "ed02457b5c41d964dbd2f2a609d63fe1bb7528dbe55e1abf5b52c249cd735797",
+        "avatar": "Bear"
+    },
+    "Pattrick": {
+        "password_hash": "e8ca10ae25157364dc26072abe7ba04a3752cbd8244eaef171412ce46558e222",
+        "avatar": "Penguin",
+        "points": 27,
+        "level": 1
+    },
+    "1111": {
+        "password_hash": "0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c",
+        "avatar": "Penguin",
+        "points": 30,
+        "level": 1
     }
 }

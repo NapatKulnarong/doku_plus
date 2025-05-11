@@ -1,5 +1,6 @@
 import random
 
+
 class SudokuBoard:
     def __init__(self, board=None, difficulty="medium"):
         # Store difficulty level

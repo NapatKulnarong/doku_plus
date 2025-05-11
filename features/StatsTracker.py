@@ -1,58 +1,101 @@
 import csv
 from datetime import datetime
 import os
-
-# Get the project root directory (2 levels up from this file)
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from typing import Optional
 
 
 class StatsTracker:
-    def __init__(self, filename="game_stats.csv"):
-        # Define the directory to save the stats file (in /data)
-        self.data_dir = os.path.join(PROJECT_ROOT, 'data')
+    def __init__(self, filename: str = "game_stats.csv"):
+        """
+        Initialize the stats tracker with a CSV file.
 
-        # Full path to the CSV file
-        self.filename = os.path.join(self.data_dir, filename)
+        Args:
+            filename: Name of the CSV file to store stats (default: game_stats.csv)
+        """
+        # Get the project root directory (2 levels up from this file)
+        self.project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-        # Make sure the data directory exists
+        # Define paths
+        self.data_dir = os.path.join(self.project_root, 'data')
+        self.filepath = os.path.join(self.data_dir, filename)
+
+        # Ensure directory exists
         os.makedirs(self.data_dir, exist_ok=True)
 
-        print(f"Saving stats to: {self.filename}")
+        # Initialize CSV file with headers if needed
+        self._initialize_file()
 
-        # Create the file with headers if it doesn't exist
-        self.ensure_file_exists()
+    def _initialize_file(self) -> None:
+        """Create the stats file with headers if it doesn't exist."""
+        if not os.path.exists(self.filepath):
+            with open(self.filepath, mode='w', newline='', encoding='utf-8') as file:
+                writer = csv.DictWriter(file, fieldnames=self._get_fieldnames())
+                writer.writeheader()
 
-    def ensure_file_exists(self):
-        """
-        Create the stats file and write headers if it doesn't already exist.
-        """
-        if not os.path.exists(self.filename):
-            with open(self.filename, mode='w', newline='') as file:
-                writer = csv.writer(file)
-                # Write header row
-                writer.writerow([
-                    "Timestamp",      # Date & time of the game session
-                    "Difficulty",     # Game difficulty (easy, medium, etc.)
-                    "Time",           # Time taken in mm:ss format
-                    "Mistakes",       # Total number of mistakes made
-                    "Hints Used",     # Number of hints used
-                    "Win",            # Result (Win or Loss)
-                    "Filled Cells"    # Number of manually filled cells
-                ])
+    @staticmethod
+    def _get_fieldnames() -> list:
+        """Return the field names for the CSV file."""
+        return [
+            "Timestamp",  # Date & time of the game session (YYYY-MM-DD HH:MM:SS)
+            "Difficulty",  # Game difficulty (easy, medium, hard, advanced)
+            "Time",  # Time taken in MM:SS format
+            "Mistakes",  # Total number of mistakes made (integer)
+            "Hints Used",  # Number of hints used (integer)
+            "Win",  # Result ("Win" or "Loss")
+            "Filled Cells"  # Number of manually filled cells (integer)
+        ]
 
-    def log_game(self, difficulty, time_taken, mistakes, hints_used, win, filled_cells):
+    def log_game(
+            self,
+            difficulty: str,
+            time_taken: str,
+            mistakes: int,
+            hints_used: int,
+            win: bool,
+            filled_cells: int
+    ) -> None:
         """
-        Append a row of game result data to the stats CSV file.
+        Log a game session to the stats file.
+
+        Args:
+            difficulty: Game difficulty level
+            time_taken: Time taken in MM:SS format
+            mistakes: Number of mistakes made
+            hints_used: Number of hints used
+            win: Whether the game was won
+            filled_cells: Number of cells filled by the player
         """
-        with open(self.filename, mode='a', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow([
-                datetime.now().strftime("%Y-%m-%d %H:%M:%S"),  # Current timestamp
-                difficulty,      # Difficulty level of the game
-                time_taken,      # Time it took to complete the game
-                mistakes,        # Number of mistakes made
-                hints_used,      # Number of hints used
-                "Win" if win else "Loss",  # Convert win boolean to readable text
-                filled_cells     # Manually filled cells (not hint-based)
-            ])
-            file.flush()  # Ensure data is written immediately to disk
+        with open(self.filepath, mode='a', newline='', encoding='utf-8') as file:
+            writer = csv.DictWriter(file, fieldnames=self._get_fieldnames())
+            writer.writerow({
+                "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "Difficulty": difficulty.lower(),
+                "Time": time_taken,
+                "Mistakes": mistakes,
+                "Hints Used": hints_used,
+                "Win": "Win" if win else "Loss",
+                "Filled Cells": filled_cells
+            })
+
+    def get_recent_games(self, count: int = 5) -> Optional[list[dict]]:
+        """
+        Get recent game sessions from the stats file.
+
+        Args:
+            count: Number of recent games to retrieve
+
+        Returns:
+            List of dictionaries containing game data, or None if file doesn't exist
+        """
+        if not os.path.exists(self.filepath):
+            return None
+
+        with open(self.filepath, mode='r', encoding='utf-8') as file:
+            reader = csv.DictReader(file)
+            games = list(reader)
+
+        return games[-count:][::-1]  # Return most recent first
+
+    def clear_stats(self) -> None:
+        """Clear all statistics by recreating the file with just headers."""
+        self._initialize_file()
