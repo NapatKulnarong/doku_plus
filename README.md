@@ -1,4 +1,4 @@
-# DOKU+ - Your Personalized and Insightful Sudoku Experience
+# DOKU+ : Your Personalized and Insightful Sudoku Experience
 
 **DOKU+** is a sophisticated Sudoku game meticulously developed using Python and the Pygame library. It offers a rich and engaging experience with personalized user accounts, adaptive difficulty levels, intelligent in-game assistance, comprehensive tracking of your progress, and insightful visualizations of your gameplay statistics.
 
