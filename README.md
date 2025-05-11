@@ -86,10 +86,14 @@ Once you have successfully installed the prerequisites and dependencies, you can
 * The game should run smoothly on most modern operating systems (Windows, macOS, Linux) that support Python and Pygame.
 
 ---
+## Developed By 
+Napat Kulnarong (6710545580)
+
+---
 
 ## MIT License
 
-Copyright (c) [year] [fullname]
+Copyright (c) 2025 Napat Kulnarong
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
