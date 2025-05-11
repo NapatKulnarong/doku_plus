@@ -99,10 +99,9 @@ doku_plus/
 └── README.md                  # This comprehensive project documentation file
 ```
 ---
-## Developed by Napat Kulnarong (6710545580)
-```
-kul.napat@hotmail.com
-```
+## Developed By 
+Napat Kulnarong (6710545580)
+
 ---
 MIT License
 
