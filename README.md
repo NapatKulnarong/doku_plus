@@ -9,41 +9,41 @@
 ```bash
 doku_plus/
 ├── assets/
-│   ├── avatars/          # User avatar images for profile personalization (bear.png, black_dog.png, ...)
-│   ├── fonts/            # Nunito font files for a clean and consistent UI (nunito.ttf, nunito_bold.ttf, ...)
-│   └── sounds/           # Engaging audio effects for user interactions and feedback (click.mp3, exit.mp3, ...)
+│   ├── avatars/               # User avatar images for profile personalization (bear.png, black_dog.png, ...)
+│   ├── fonts/                 # Nunito font files for a clean and consistent UI (nunito.ttf, nunito_bold.ttf, ...)
+│   └── sounds/                # Engaging audio effects for user interactions and feedback (click.mp3, exit.mp3, ...)
 │
 ├── core/
-│   ├── pycache/      # Python bytecode cache directory
-│   ├── AuthScreen.py     # Manages secure user authentication (login and registration)
-│   ├── constants.py      # Defines global constants such as colors, fonts, and screen dimensions for consistent styling
-│   ├── GameStatsScreen.py # Implements the screen for displaying detailed game statistics with graphs
-│   ├── HowToPlay.py      # Offers an interactive guide for new players
-│   ├── Leaderboard.py    # Displays player rankings based on skill and progress
-│   ├── Menu.py           # Implements intuitive navigation through the game's main options
-│   ├── PlayScreen.py     # Allows users to select their desired game difficulty
-│   ├── SudokuBoard.py    # Handles the generation of diverse Sudoku puzzles and their validation
-│   ├── SudokuGame.py     # Orchestrates the core game logic, state management, and hint system
-│   ├── SudokuRenderer.py # Responsible for efficiently rendering the game board and UI elements
-│   ├── Timer.py          # Implements accurate in-game time tracking with pause and resume
-│   └── UserManager.py    # Manages persistent user data storage and retrieval using JSON
+│   ├── pycache/               # Python bytecode cache directory
+│   ├── AuthScreen.py          # Manages secure user authentication (login and registration)
+│   ├── constants.py           # Defines global constants such as colors, fonts, and screen dimensions for consistent styling
+│   ├── GameStatsScreen.py     # Implements the screen for displaying detailed game statistics with graphs
+│   ├── HowToPlay.py           # Offers an interactive guide for new players
+│   ├── Leaderboard.py         # Displays player rankings based on skill and progress
+│   ├── Menu.py                # Implements intuitive navigation through the game's main options
+│   ├── PlayScreen.py          # Allows users to select their desired game difficulty
+│   ├── SudokuBoard.py         # Handles the generation of diverse Sudoku puzzles and their validation
+│   ├── SudokuGame.py          # Orchestrates the core game logic, state management, and hint system
+│   ├── SudokuRenderer.py      # Responsible for efficiently rendering the game board and UI elements
+│   ├── Timer.py               # Implements accurate in-game time tracking with pause and resume
+│   └── UserManager.py         # Manages persistent user data storage and retrieval using JSON
 │
 ├── data/
-│   ├── game_stats.csv    # Logs detailed gameplay statistics in a structured CSV format for analysis
-│   └── users.json        # Stores user account information and their progress (levels, points)
+│   ├── game_stats.csv         # Logs detailed gameplay statistics in a structured CSV format for analysis
+│   └── users.json             # Stores user account information and their progress (levels, points)
 │
 ├── features/
-│   ├── pycache/      # Python bytecode cache directory
+│   ├── pycache/               # Python bytecode cache directory
 │   ├── analytics/
-│   │   ├── pycache/  # Python bytecode cache directory
-│   │   ├── dashboard.py  # Provides a visual overview of the user's game statistics and progress
+│   │   ├── pycache/           # Python bytecode cache directory
+│   │   ├── dashboard.py       # Provides a visual overview of the user's game statistics and progress
 │   │   └── graph_generator.py # Generates visual representations of gameplay statistics
-│   ├── PointTracker.py   # Manages the accumulation and progression of user points and levels
-│   └── StatsTracker.py   # Handles the logging of comprehensive gameplay statistics
+│   ├── PointTracker.py        # Manages the accumulation and progression of user points and levels
+│   └── StatsTracker.py        # Handles the logging of comprehensive gameplay statistics
 │
-├── main.py               # The primary script to launch the DOKU+ application
-├── requirements.txt      # Lists the Python package dependencies for the project
-└── README.md             # This comprehensive project documentation file
+├── main.py                    # The primary script to launch the DOKU+ application
+├── requirements.txt           # Lists the Python package dependencies for the project
+└── README.md                  # This comprehensive project documentation file
 ```
 
 ---
@@ -111,41 +111,6 @@ doku_plus/
     ```bash
     python main.py
     ```
-
----
-
-## 📂 File Descriptions
-
--   `assets/`: Contains all multimedia assets such as images, fonts, and sound effects.
--   `core/`: Houses the fundamental game logic and data management components.
-    -   `AuthScreen.py`: Manages user authentication processes.
-    -   `Menu.py`: Implements the main game menu and navigation.
-    -   `SudokuBoard.py`: Handles Sudoku puzzle creation and validation.
-    -   `SudokuGame.py`: Contains the core game state and logic.
-    -   `SudokuRenderer.py`: Manages the rendering of the game interface.
-    -   `Timer.py`: Implements the in-game timer functionality.
-    -   `UserManager.py`: Handles user data storage and retrieval.
-    -   `constants.py`: Defines global project-wide constants.
--   `data/`: Stores persistent game data, including user accounts and statistics.
-    -   `game_stats.csv`: Stores detailed records of game sessions.
-    -   `users.json`: Contains user account information and progress.
--   `features/`: Includes modules that add specific functionalities to the game.
-    -   `analytics/`: Contains modules for game analysis and reporting.
-        -   `Leaderboard.py`: Manages and displays player rankings.
-        -   `graph_generator.py`: Creates visualizations of game statistics.
-    -   `PointTracker.py`: Manages user score and level progression.
-    -   `StatsTracker.py`: Handles the logging of gameplay statistics.
-    -   `Themes.py`: (Future) For implementing UI theme customization.
--   `ui/`: Contains modules responsible for the user interface elements and screens.
-    -   `dashboard.py`: Implements the user statistics dashboard.
-    -   `GameStatsScreen.py`: Displays detailed game statistics with graphs.
-    -   `HowToPlay.py`: Provides instructions on how to play the game.
-    -   `PlayScreen.py`: Allows users to select the game difficulty.
-    -   `screens/`: (Potentially contains other UI-related modules).
--   `main.py`: The entry point for running the DOKU+ application.
--   `requirements.txt`: Lists the external Python libraries required for the project.
--   `README.md`: This documentation file providing an overview of the project.
-
 ---
 
 ## 📌 Version Information
