@@ -58,5 +58,49 @@
         "avatar": "Penguin",
         "points": 30,
         "level": 1
+    },
+    "New": {
+        "password_hash": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+        "avatar": "Meerkat"
+    },
+    "Pattt": {
+        "password_hash": "284112dc9230ea00e8bd4e922430deb5d31493e6a5db02d15bf34995df7afb6e",
+        "avatar": "Gorilla"
+    },
+    "Patrick": {
+        "password_hash": "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+        "avatar": "Rabbit",
+        "points": 7,
+        "level": 1
+    },
+    "Patrik": {
+        "password_hash": "fc1f09ab08ebdd072ea6da53a5691abcc18c9163b1be1f0921a5adb50e3f5077",
+        "avatar": "Meerkat"
+    },
+    "Pattrcikkk": {
+        "password_hash": "3aec58dfaa45a1042d1f02f8da86827dfb8a8756e7d60db7afb8488a8bade317",
+        "avatar": "Chick"
+    },
+    "Mark123": {
+        "password_hash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+        "avatar": "Seal",
+        "points": 5,
+        "level": 1
+    },
+    "MArkP": {
+        "password_hash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+        "avatar": "Bear",
+        "points": 6,
+        "level": 1
+    },
+    "Park262": {
+        "password_hash": "af5aed86d70dafd5f3485fb29ac1133c84e560eab4fcaf190ac650f983d7f9ca",
+        "avatar": "Penguin"
+    },
+    "Pattrick2325": {
+        "password_hash": "4b97a5f3cb3e2614a78bb24ff0ee0e7c98f0b4820abe5a47e67b65c4681ddfbe",
+        "avatar": "Bear",
+        "points": 9,
+        "level": 1
     }
 }
