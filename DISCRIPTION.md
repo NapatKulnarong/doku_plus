@@ -17,10 +17,7 @@ DOKU+ offers a compelling blend of traditional Sudoku gameplay with modern user 
 The core concept behind DOKU+ is to provide not just a Sudoku game, but a personalized journey of improvement and engagement. By tracking progress, offering feedback through statistics, and providing intelligent assistance, DOKU+ aims to be both entertaining and a tool for enhancing logical thinking skills.
 
 ## 📜 UML Class Diagram
-
-```
-html<img src="https://github.com/NapatKulnarong/doku_plus/blob/main/UML_Diagram.png" alt="DOKU+ UML Class Diagram" width="80%">
-```
+![DOKU+ UML Class Diagram](https://github.com/NapatKulnarong/doku_plus/blob/main/UML_Diagram.png)
 ---
 ## 🔑 Key Features
 - Secure User Accounts: Login and registration with password hashing and avatar selection.
