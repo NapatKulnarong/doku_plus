@@ -104,7 +104,7 @@ Napat Kulnarong (6710545580)
 ---
 MIT License
 
-Copyright (c) [2025] [Napat Kulnarong]
+Copyright (c) 2025 Napat Kulnarong
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
